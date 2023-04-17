@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+
+:root {
+  font-family: "Bangers", cursive;
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: black;
+}
+html {
+  box-sizing: border-box;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+}
+html,
+body,
+#root,
+#__next {
+  height: 100%;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+}
+* {
+  line-height: 1.5;
+  line-height: calc(1em + 0.5rem);
+  vertical-align: baseline;
+}
+#root,
+#__next {
+  isolation: isolate;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+
+/* #container {
+  position: absolute;
+  width: 800px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 25px;
+} */
+
+#canvas1 {
+  background-color: #2f2f2f;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 3px solid rgb(38, 1, 49);
+}
+
+#playerImage,
+#enemyImage,
+#layer_1,
+#layer_1-1,
+#layer_2,
+#layer_3,
+#layer_4,
+#layer_4-1,
+#layer_5,
+#layer_5-1,
+#layer_5-2,
+#enemy_fly,
+#enemy_plant,
+#enemy_spider_big,
+#fire,
+#boom,
+#hit,
+#lives,
+#lives_empty,
+#pow,
+#pow_empty,
+#live_new,
+#new_live,
+#barrel,
+#burger,
+#shield,
+#power,
+#numbers,
+#skills,
+#piggy,
+#mac,
+#home,
+#home1,
+#dino,
+#programm,
+#star,
+#graduate,
+#perfolenta,
+#radiolamp,
+#teamwin,
+#lochman,
+#rocket,
+#atlantis,
+#dragon,
+#fireball {
+  display: none;
+}
+p {
+  background-color: rgba(185, 180, 28, 0.403);
+}
+
+#overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
