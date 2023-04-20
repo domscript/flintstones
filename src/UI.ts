@@ -9,6 +9,7 @@ const IMAGE_NUMBERS = "numbers";
 const IMAGE_SKILLS = "skills";
 const IMAGE_PIGGY = "piggy";
 const IMAGE_MAC = "mac";
+const IMAGE_TABLO = "overlay";
 
 const SIZE_X = 40;
 const SIZE_Y = 40;
@@ -33,6 +34,7 @@ export class UI {
   ) as HTMLImageElement;
   private imagePiggy = document.getElementById(IMAGE_PIGGY) as HTMLImageElement;
   private imageMac = document.getElementById(IMAGE_MAC) as HTMLImageElement;
+  private tablo = document.getElementById(IMAGE_TABLO) as HTMLImageElement;
 
   i = 0;
   j = 0;
@@ -64,6 +66,7 @@ export class UI {
   constructor(public game: Game) {}
 
   draw(context: CanvasRenderingContext2D) {
+    this.drawTablo(context);
     this.drawLivesIcons(context);
     this.drawHeartIcons(context);
     this.drawShieldIcons(context);
@@ -91,6 +94,10 @@ export class UI {
     this.messageGameWon(context);
     this.debugInfo(context);
     context.restore();
+  }
+
+  drawTablo(context: CanvasRenderingContext2D): void {
+    context.drawImage(this.tablo, 0, 0, this.game.width, this.game.height);
   }
 
   drawHeartIcons(context: CanvasRenderingContext2D): void {

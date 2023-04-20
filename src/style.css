@@ -143,17 +143,10 @@ ul {
 #rocket,
 #atlantis,
 #dragon,
-#fireball {
+#fireball,
+#overlay {
   display: none;
 }
 p {
   background-color: rgba(185, 180, 28, 0.403);
-}
-
-#overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
 }
