@@ -55,7 +55,7 @@ export class Game {
   maxSpeed = 5;
 
   time = 0;
-  maxTime = 30000000;
+  maxTime = 5 * 60 * 1000;
   gameOver = false;
   gameWon = false;
 

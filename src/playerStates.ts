@@ -53,8 +53,8 @@ abstract class State {
   ) {}
 
   enter() {
-    this.game.player.width = this.game.player.images[`${this.states}`].sizeX;
-    this.game.player.height = this.game.player.images[`${this.states}`].sizeY;
+    this.game.player.width = this.game.player.images[this.states].sizeX;
+    this.game.player.height = this.game.player.images[this.states].sizeY;
     this.game.player.frameX = this.game.player.images[this.states].img.map(
       (el) => el.coorX
     );
