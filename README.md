@@ -1,3 +1,3 @@
 # flintstones
 
-## [Have Fun](https://flintstones.netlify.app/)
+## [Have Fun!](https://flintstones.netlify.app/)
