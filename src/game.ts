@@ -461,10 +461,16 @@ export class Game {
   }
 
   checkCollisionHome(a: Player, b: Home): [boolean, number, number] {
-    const dx = a.x - b.x;
-    const dy = a.y0 - b.y;
-    const distance = Math.hypot(dx, dy);
-    const sumOfRadiuses = a.collisionRadiusHead + b.collisionRadius;
-    return [distance < sumOfRadiuses, b.x, b.y];
+    const dxl = a.x - b.x;
+    const dyl = a.y0 - b.y;
+    const dxr = a.x - b.x - b.sizeX;
+    const dyr = a.y0 - b.y;
+    const distancel = Math.hypot(dxl, dyl);
+    const distancer = Math.hypot(dxr, dyr);
+    const sumOfRadiuses = a.collisionRadiusHead + b.collisionRadius * 10;
+    if (distancel < sumOfRadiuses) return [distancel < sumOfRadiuses, b.x, b.y];
+    if (distancer < sumOfRadiuses)
+      return [distancer < sumOfRadiuses, b.x + b.sizeX - 10, b.y];
+    return [false, b.x, b.y];
   }
 }

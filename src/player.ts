@@ -379,6 +379,8 @@ export class Player {
       this.vy = 0;
       this.x = this.hug[1];
       this.y = this.hug[2] + this.collisionRadius * 4;
+    } else {
+      this.hug[0] = false;
     }
     if (this.currentState === this.states[States.CLIMBING]) {
       this.vy = 0;
