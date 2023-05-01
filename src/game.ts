@@ -281,7 +281,7 @@ export class Game {
     }
 
     this.time += deltaTime;
-    if (this.time > this.maxTime) {
+    if (this.time > this.maxTime && !this.gameWon) {
       this.gameOver = true;
     }
     this.background.update();
