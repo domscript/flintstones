@@ -197,8 +197,6 @@ export class Game {
         ground.x = this.width + 5;
       });
 
-      // this.speed = 0;
-
       if (Math.random() < 0.03)
         this.stars.push(new Star(this, this.player.x, this.player.y));
     }
