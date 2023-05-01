@@ -159,7 +159,7 @@ export class Game {
   draw(context: CanvasRenderingContext2D) {
     this.background.draw(context);
     if (this.grounds.length) {
-      this.grounds[0].draw(context);
+      this.grounds.forEach((home) => home.draw(context));
     }
     this.stars.forEach((star) => {
       star.draw(context);
@@ -192,8 +192,10 @@ export class Game {
     this.deltaTime = deltaTime;
     if (this.gameWon) {
       this.background = new Background(this, layers[2]);
-      this.grounds[0].idImg = "home";
-      this.grounds[0].x = this.width + 5;
+      this.grounds.forEach((ground) => {
+        ground.idImg = "home";
+        ground.x = this.width + 5;
+      });
 
       // this.speed = 0;
 
@@ -202,15 +204,29 @@ export class Game {
     }
 
     if (!this.atlantis && !this.grounds.length) {
-      this.grounds = [
-        new Home(
-          this,
-          this.homeH,
-          this.homeStart,
-          this.homeStart + this.homeW,
-          "home"
-        ),
-      ];
+      if (Math.random() > 0.7) {
+        this.grounds = [
+          new Home(
+            this,
+            this.homeH,
+            this.homeStart,
+            this.homeStart + this.homeW,
+            "home"
+          ),
+        ];
+      } else {
+        const x = this.homeStart;
+        this.grounds = [
+          new Home(this, this.homeH, x, x + this.homeW, "home"),
+          new Home(
+            this,
+            this.homeH,
+            x + this.homeW * 1.2,
+            x + this.homeW * 1.2 + this.homeW,
+            "home"
+          ),
+        ];
+      }
     } else if (!this.grounds.length) {
       this.grounds = [
         new Home(
@@ -222,7 +238,9 @@ export class Game {
         ),
       ];
     } else if (this.grounds.length) {
-      this.grounds[0].idImg = "home1";
+      this.grounds.forEach((ground) => {
+        ground.idImg = "home1";
+      });
     }
 
     if (this.atlantis && !this.gameWon) {

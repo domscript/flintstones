@@ -390,7 +390,9 @@ export class Player {
 
     if (this.onGround() && this.groundX) {
       this.vy = 0;
-      this.y = this.game.grounds[0].y - this.collisionRadius;
+      this.game.grounds.forEach((ground) => {
+        this.y = ground.y - this.collisionRadius;
+      });
     } else {
       this.game.height - this.game.groundMarginMain - this.collisionRadius;
     }
@@ -699,30 +701,34 @@ export class Player {
   }
 
   collisionWithHomeRoof() {
-    const [collision, x, y] = this.game.checkCollisionHome(
-      this,
-      this.game.grounds[0]
-    );
-    if (
-      collision &&
-      (this.currentState === this.states[States.JUMPING] ||
-        this.currentState === this.states[States.FALLING])
-    ) {
-      this.hug = [true, x, y];
-    }
+    this.game.grounds.forEach((ground) => {
+      const [collision, x, y] = this.game.checkCollisionHome(this, ground);
+      if (
+        collision &&
+        (this.currentState === this.states[States.JUMPING] ||
+          this.currentState === this.states[States.FALLING])
+      ) {
+        this.hug = [true, x, y];
+      }
+    });
   }
 
   onGround() {
-    const growndY =
-      this.y + this.collisionRadius >= this.game.grounds[0].y &&
-      this.y <= this.game.grounds[0].y;
+    const growndY: boolean[] = [];
+    const growndX: boolean[] = [];
+    this.game.grounds.forEach((ground) => {
+      if (this.y + this.collisionRadius >= ground.y && this.y <= ground.y)
+        growndY.push(true);
 
-    if (this.x < this.game.grounds[0].x || this.x > this.game.grounds[0].x2) {
-      this.groundX = false;
-    } else {
-      this.groundX = true;
-    }
-    if (growndY) {
+      if (this.x < ground.x || this.x > ground.x2) {
+        growndX.push(false);
+      } else {
+        growndX.push(true);
+      }
+    });
+    this.groundX = growndX.some((el) => el);
+
+    if (growndY.some((el) => el)) {
       return true;
     }
     return false;
