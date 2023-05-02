@@ -129,12 +129,13 @@ export class Walking extends State implements StateInt {
       );
     }
 
-    if (
-      (input.includes(Control.ArrowRight) ||
-        input.includes(Control.ArrowLeft)) &&
+    if (input.includes(Control.ArrowRight) && input.includes(Control.Jump)) {
+      this.game.player.setState(States.JUMPING, 1);
+    } else if (
+      input.includes(Control.ArrowLeft) &&
       input.includes(Control.Jump)
     ) {
-      this.game.player.setState(States.JUMPING, 1);
+      this.game.player.setState(States.JUMPING, 0);
     } else if (
       !input.includes(Control.ArrowRight) &&
       !input.includes(Control.ArrowLeft)
@@ -147,7 +148,7 @@ export class Walking extends State implements StateInt {
     ) {
       this.game.player.setState(States.SITTING, 0);
     } else if (input.includes(Control.Jump)) {
-      this.game.player.setState(States.JUMPING, 1);
+      this.game.player.setState(States.JUMPING, 0);
     } else if (input.includes(Control.Attack)) {
       this.game.player.setState(States.ATTACK1, 1);
     } else if (this.game.super[0] > 0) {
