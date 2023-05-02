@@ -88,7 +88,7 @@ export class Fire extends Particle {
   image = document.getElementById("fire") as unknown as HTMLImageElement;
   speedX: number = 1;
   speedY: number = 1;
-  size: number = Math.random() * 100 + 50;
+  size: number = Math.random() * 30 + 30;
 
   angle = 0;
   va = Math.random() * 0.2 - 0.1;
