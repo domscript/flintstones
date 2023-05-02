@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { Dust, Fire } from "./particles";
+import { Dust } from "./particles";
 import { Control } from "./input";
 export const SPEED_UP = 9;
 
@@ -210,16 +210,6 @@ export class Attack1 extends State implements StateInt {
     this.game.player.collisionRadiusAttack = this.game.player.collisionRadius0;
   }
   handleInput(input: string[]) {
-    // if (this.game.particles.length < this.game.particlesMax)
-    //   this.game.particles.push(
-    //     new Fire(
-    //       this.game.player.game,
-    //       this.game.player.x + 40,
-    //       this.game.player.y,
-    //       "rgba(0,0,0,0.2)"
-    //     )
-    //   );
-
     if (
       !input.includes(Control.Attack) &&
       (!this.game.player.onGround() ||
@@ -435,15 +425,6 @@ export class Attack2 extends State implements StateInt {
     this.game.player.collisionRadiusAttack = this.game.player.collisionRadius0;
   }
   handleInput(input: string[]) {
-    // if (this.game.particles.length < this.game.particlesMax)
-    //   this.game.particles.push(
-    //     new Fire(
-    //       this.game.player.game,
-    //       this.game.player.x,
-    //       this.game.player.y - this.game.player.collisionRadius * 3,
-    //       "rgba(0,0,0,0.2)"
-    //     )
-    //   );
     setTimeout(() => {
       if (
         !input.includes(Control.Attack) &&
