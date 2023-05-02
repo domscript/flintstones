@@ -5,7 +5,6 @@ export enum Control {
   ArrowUp = "ArrowUp",
   ArrowLeft = "ArrowLeft",
   ArrowRight = "ArrowRight",
-  SuperAttack = "KeyA",
   Jump = "KeyX",
   Attack = "KeyZ",
   Shift = "Shift",
@@ -28,7 +27,6 @@ export class InputHandler {
         case Control.Shift:
         case Control.Enter:
         case Control.Jump:
-        case Control.Attack:
           this.keys.push(e.code);
           break;
         case Control.Debug:
@@ -38,13 +36,26 @@ export class InputHandler {
           break;
       }
 
-      if (e.code === Control.SuperAttack) {
+      if (e.code === Control.Attack) {
         if (!this.keys.includes(e.code)) {
-          this.superKeys.push({
-            code: e.code,
-            timeStamp: e.timeStamp,
-            type: e.type,
-          });
+          if (!this.superKeys.length) this.keys.push(e.code);
+
+          setTimeout(() => {
+            this.keys = this.keys.filter((el) => !(el === Control.Attack));
+          }, 700);
+          if (!this.superKeys.length)
+            this.superKeys.push({
+              code: e.code,
+              timeStamp: e.timeStamp,
+              type: e.type,
+            });
+
+          if (e.timeStamp - this.superKeys[0].timeStamp < 4000)
+            this.superKeys.push({
+              code: e.code,
+              timeStamp: e.timeStamp,
+              type: e.type,
+            });
         }
         if (
           this.superKeys.length > 2 &&
@@ -77,7 +88,7 @@ export class InputHandler {
           break;
       }
 
-      if (e.code === Control.SuperAttack) {
+      if (e.code === Control.Attack) {
         if (e.timeStamp - this.superKeys[0].timeStamp > 1000)
           this.superKeys = this.superKeys.filter((el) => !(el.code === e.code));
         this.game.super = [-0.1];
