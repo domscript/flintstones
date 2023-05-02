@@ -20,7 +20,6 @@ import {
   StateInt,
   States,
 } from "./playerStates";
-// import { Spark } from "./effects";
 import { CollisionAnimation, HitAnimation } from "./collisionAnimation";
 import { FloatingMessage } from "./floatingMessage";
 
@@ -79,12 +78,17 @@ export class Player {
       img: [{ coorX: 481, coorY: 0 }],
     },
     [States.ATTACK1]: {
-      sizeX: 41,
+      sizeX: 60,
       sizeY: 50,
       img: [
-        { coorX: 0, coorY: 78 },
-        { coorX: 37, coorY: 78 },
-        { coorX: 328, coorY: 78 },
+        // { coorX: 0, coorY: 78 },
+        // { coorX: 0, coorY: 78 },
+        { coorX: 35, coorY: 78 },
+        { coorX: 35, coorY: 78 },
+        { coorX: 35, coorY: 78 },
+        { coorX: 310, coorY: 78 },
+        { coorX: 310, coorY: 78 },
+        { coorX: 310, coorY: 78 },
       ],
     },
     [States.ATTACK2]: {
