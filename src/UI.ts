@@ -510,11 +510,7 @@ export class UI {
         this.game.width / 2,
         this.game.height / 2 + FONT_SIZE * 2
       );
-      context.fillText(
-        `⬅︎ ➡︎ ⇧ ⇩, 1, 2, Shift, Enter`,
-        this.game.width / 2,
-        100
-      );
+      context.fillText(`⬅︎ ➡︎ ⇧ ⇩, Z, X, A`, this.game.width / 2, 100);
     }
   }
 }

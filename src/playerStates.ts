@@ -72,13 +72,13 @@ export class Staying extends State implements StateInt {
       this.game.player.setState(States.WALKING, 1);
     } else if (input.includes(Control.ArrowLeft)) {
       this.game.player.setState(States.WALKING, 0);
-    } else if (input.includes(Control.Control)) {
+    } else if (input.includes(Control.Attack)) {
       this.game.player.collisionRadiusAttack =
         this.game.player.collisionRadius0;
       this.game.player.setState(States.ATTACK1, 0);
     } else if (input.includes(Control.ArrowDown)) {
       this.game.player.setState(States.SITTING, 0);
-    } else if (input.includes(Control.ArrowUp)) {
+    } else if (input.includes(Control.Jump)) {
       this.game.player.setState(States.JUMPING, 0);
     } else if (this.game.super[0] > 0) {
       this.game.player.setState(States.ATTACK2STAYING, 0);
@@ -104,7 +104,7 @@ export class Sitting extends State implements StateInt {
     } else if (input.includes(Control.ArrowUp)) {
       this.game.player.head = this.game.player.head0;
       this.game.player.setState(States.STAYING, 0);
-    } else if (input.includes(Control.Control)) {
+    } else if (input.includes(Control.Attack)) {
       this.game.player.collisionRadiusAttack =
         this.game.player.collisionRadius0;
       this.game.player.head = this.game.player.head0;
@@ -132,7 +132,7 @@ export class Walking extends State implements StateInt {
     if (
       (input.includes(Control.ArrowRight) ||
         input.includes(Control.ArrowLeft)) &&
-      input.includes(Control.ArrowUp)
+      input.includes(Control.Jump)
     ) {
       this.game.player.setState(States.JUMPING, 1);
     } else if (
@@ -146,9 +146,9 @@ export class Walking extends State implements StateInt {
         this.game.player.ground())
     ) {
       this.game.player.setState(States.SITTING, 0);
-    } else if (input.includes(Control.ArrowUp)) {
+    } else if (input.includes(Control.Jump)) {
       this.game.player.setState(States.JUMPING, 1);
-    } else if (input.includes(Control.Control)) {
+    } else if (input.includes(Control.Attack)) {
       this.game.player.setState(States.ATTACK1, 1);
     } else if (this.game.super[0] > 0) {
       this.game.player.setState(States.ATTACK2WALKING, 0);
@@ -176,7 +176,7 @@ export class Jumping extends State implements StateInt {
   handleInput(input: string[]) {
     if (this.game.player.vy >= 0) {
       this.game.player.setState(States.FALLING, 0);
-    } else if (input.includes(Control.Control)) {
+    } else if (input.includes(Control.Attack)) {
       this.game.player.setState(States.ATTACK1, 0);
     }
   }
@@ -187,14 +187,14 @@ export class Falling extends State implements StateInt {
     super(States.FALLING, game);
   }
   handleInput(input: string[]) {
-    if (input.includes(Control.Control)) {
+    if (input.includes(Control.Attack)) {
       this.game.player.setState(States.ATTACK1, 0);
     } else if (
       (this.game.player.onGround() && this.game.player.groundX) ||
       this.game.player.ground()
     ) {
       this.game.player.setState(States.STAYING, 0);
-    } else if (this.game.player.hug[0] && input.includes(Control.Shift)) {
+    } else if (this.game.player.hug[0] && input.includes(Control.Jump)) {
       this.game.player.setState(States.HUGGING, 0);
     }
   }
@@ -214,14 +214,14 @@ export class Attack1 extends State implements StateInt {
       this.game.particles.push(
         new Fire(
           this.game.player.game,
-          this.game.player.x,
-          this.game.player.y - this.game.player.collisionRadius * 3,
+          this.game.player.x + 40,
+          this.game.player.y,
           "rgba(0,0,0,0.2)"
         )
       );
 
     if (
-      !input.includes(Control.Control) &&
+      !input.includes(Control.Attack) &&
       (!this.game.player.onGround() ||
         !this.game.player.groundX ||
         !this.game.player.ground())
@@ -234,7 +234,7 @@ export class Attack1 extends State implements StateInt {
       this.game.player.collisionRadiusAttack = 0;
       this.game.player.head = this.game.player.head0;
     } else if (
-      !input.includes(Control.Control) &&
+      !input.includes(Control.Attack) &&
       (!this.game.player.onGround() ||
         !this.game.player.groundX ||
         !this.game.player.ground()) &&
@@ -248,7 +248,7 @@ export class Attack1 extends State implements StateInt {
       this.game.player.collisionRadiusAttack = 0;
       this.game.player.head = this.game.player.head0;
     } else if (
-      !input.includes(Control.Control) &&
+      !input.includes(Control.Attack) &&
       ((this.game.player.onGround() && this.game.player.groundX) ||
         this.game.player.ground())
     ) {
@@ -293,7 +293,7 @@ export class Hugging extends State implements StateInt {
     super(States.HUGGING, game);
   }
   handleInput(input: string[]) {
-    if (input.includes(Control.Enter)) {
+    if (input.includes(Control.ArrowUp)) {
       this.game.player.setState(States.CLIMBING, 0);
     }
     if (input.includes(Control.ArrowDown)) {
@@ -311,7 +311,7 @@ export class Climbing extends State implements StateInt {
     setTimeout(() => {
       this.game.player.setState(States.STAYING, 0);
       this.game.player.y = this.game.grounds[0].y;
-    }, 500);
+    }, 100);
   }
 }
 
@@ -336,7 +336,7 @@ export class Attack2Staying extends State implements StateInt {
       } else if (input.includes(Control.ArrowLeft)) {
         this.game.player.setState(States.ATTACK2WALKING, 0);
       }
-      if (input.includes(Control.ArrowUp)) {
+      if (input.includes(Control.Jump)) {
         this.game.player.setState(States.ATTACK2JUMPING, 0);
       }
     }
@@ -368,7 +368,7 @@ export class Attack2Walking extends State implements StateInt {
       } else {
         this.game.player.setState(States.ATTACK2STAYING, 0);
       }
-      if (input.includes(Control.ArrowUp)) {
+      if (input.includes(Control.Jump)) {
         this.game.player.setState(States.ATTACK2JUMPING, 1);
       }
     }
@@ -446,7 +446,7 @@ export class Attack2 extends State implements StateInt {
       );
     setTimeout(() => {
       if (
-        !input.includes(Control.Control) &&
+        !input.includes(Control.Attack) &&
         (!this.game.player.onGround() ||
           !this.game.player.groundX ||
           !this.game.player.ground())
@@ -459,7 +459,7 @@ export class Attack2 extends State implements StateInt {
         this.game.player.collisionRadiusAttack = 0;
         this.game.player.head = this.game.player.head0;
       } else if (
-        !input.includes(Control.Control) &&
+        !input.includes(Control.Attack) &&
         (!this.game.player.onGround() ||
           !this.game.player.groundX ||
           !this.game.player.ground()) &&
@@ -473,7 +473,7 @@ export class Attack2 extends State implements StateInt {
         this.game.player.collisionRadiusAttack = 0;
         this.game.player.head = this.game.player.head0;
       } else if (
-        !input.includes(Control.Control) &&
+        !input.includes(Control.Attack) &&
         ((this.game.player.onGround() && this.game.player.groundX) ||
           this.game.player.ground())
       ) {

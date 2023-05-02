@@ -5,10 +5,12 @@ export enum Control {
   ArrowUp = "ArrowUp",
   ArrowLeft = "ArrowLeft",
   ArrowRight = "ArrowRight",
-  Control = "1",
-  SuperAttack = "Digit2",
+  SuperAttack = "KeyA",
+  Jump = "KeyX",
+  Attack = "KeyZ",
   Shift = "Shift",
   Enter = "Enter",
+  Debug = "KeyD",
 }
 
 export class InputHandler {
@@ -16,19 +18,20 @@ export class InputHandler {
   superKeys: { code: string; timeStamp: number; type: string }[] = [];
   constructor(public game: Game) {
     window.addEventListener("keydown", (e) => {
-      if (this.keys.includes(e.key)) return;
+      if (this.keys.includes(e.code)) return;
 
-      switch (e.key) {
+      switch (e.code) {
         case Control.ArrowDown:
         case Control.ArrowUp:
         case Control.ArrowLeft:
         case Control.ArrowRight:
         case Control.Shift:
         case Control.Enter:
-        case Control.Control:
-          this.keys.push(e.key);
+        case Control.Jump:
+        case Control.Attack:
+          this.keys.push(e.code);
           break;
-        case "d":
+        case Control.Debug:
           this.game.debug = !this.game.debug;
           break;
         default:
@@ -59,15 +62,16 @@ export class InputHandler {
       }
     });
     window.addEventListener("keyup", (e) => {
-      switch (e.key) {
+      switch (e.code) {
         case Control.ArrowDown:
         case Control.ArrowUp:
         case Control.ArrowLeft:
         case Control.ArrowRight:
         case Control.Shift:
         case Control.Enter:
-        case Control.Control:
-          this.keys = this.keys.filter((el) => !(el === e.key));
+        case Control.Jump:
+        case Control.Attack:
+          this.keys = this.keys.filter((el) => !(el === e.code));
           break;
         default:
           break;
