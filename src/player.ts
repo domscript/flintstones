@@ -81,14 +81,14 @@ export class Player {
       sizeX: 60,
       sizeY: 50,
       img: [
-        // { coorX: 0, coorY: 78 },
-        // { coorX: 0, coorY: 78 },
         { coorX: 35, coorY: 78 },
         { coorX: 35, coorY: 78 },
         { coorX: 35, coorY: 78 },
         { coorX: 310, coorY: 78 },
         { coorX: 310, coorY: 78 },
         { coorX: 310, coorY: 78 },
+        { coorX: 35, coorY: 78 },
+        { coorX: 35, coorY: 78 },
       ],
     },
     [States.ATTACK2]: {
